@@ -1,43 +1,34 @@
-import axios from "axios";
-
-axios.defaults.baseURL = "https://api.thecatapi.com/v1";
-axios.defaults.headers.common["x-api-key"] = "live_sFk9zT8l2vQd7Y8HEpVtQUNkiz5NdWfSDo35O2SJIILl76Dl3HE1XRDHR3aF8Vh0";
+import { fetchBreeds, fetchCatByBreed } from "./cat-api";
 
 const selectEl = document.querySelector(".breed-select");
+const catInfoEl = document.querySelector(".cat-info");
 
-console.log(selectEl);
+selectEl.addEventListener("change", onSelectChange);
 
-function fetchBreeds() {
-    return axios.get("/breeds").then((resp) => {
-        // console.log(resp.data);
-        return resp.data;
-    });
-  // return axios.get('/breeds')
-  //   .then(response => {
-  //     if (!response.ok) {
-  //       throw new Error(response.status);
-  //     }
-  //     return response.json();
-  //   })
-    // .then(data => {
-    //   console.log(data.id)
-    // // Data handling
-    // })
-    // .catch(error => {
-    // // Error handling
-    // });
-  // .then(response => {
-  //   // handle success
-  //   console.log(response);
-  //   console.log(response.data[0].id);
-  // })
-  // .catch(function (error) {
-  //   // handle error
-  //   console.log(error);
-  // })
+function onSelectChange(evt) {
+  const breedId = evt.currentTarget.value;
+  fetchCatByBreed(breedId)
+    .then(createCatMarkup)
+    .catch((err) => console.log(err));
 };
-fetchBreeds().then(data => {selectEl.insertAdjacentHTML("afterbegin", createListCats(data))})
+
+fetchBreeds()
+  .then(data => { selectEl.insertAdjacentHTML("afterbegin", createListCats(data)) })
+  .catch((err) => console.log(err));
+
+ 
 
 function createListCats(data) {
   return data.map(({ id, name }) => `<option value="${id}">${name}</option>`).join("");
-}
+};
+
+function createCatMarkup({ url, breeds } = data) {
+  const catCard = `
+    <img src="${url}" alt="${breeds[0].name}" />
+    <h2>${breeds[0].name}</h2>
+    <p>${breeds[0].description}</p>
+    <p>Temperament:${breeds[0].temperament}</p>
+  `;
+
+  catInfoEl.innerHTML = catCard;
+};
