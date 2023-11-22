@@ -25,9 +25,6 @@ function onSelectChange(evt) {
 fetchBreeds()
   .then(data => { selectEl.insertAdjacentHTML("afterbegin", createListCats(data)) })
   .catch(error => iziToast.error({ message: "Oops! Something went wrong! Try reloading the page!" }))
-  .finally(loaderEl.setAttribute("hidden", "hidden"));
-
- 
 
 function createListCats(data) {
   loaderEl.setAttribute("hidden", "hidden")
