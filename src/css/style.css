@@ -1,0 +1,61 @@
+body {
+    margin: 50px;
+}
+
+.mybox {
+    position: relative;
+    display: inline-block;
+}
+
+select {
+    display: inline-block;
+    height: 30px;
+    width: 150px;
+    outline: none;
+    color: #74646e;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px #999;
+    background: #eee;
+}
+
+.mybox .myarrow {
+    width: 23px;
+    height: 28px;
+    position: absolute;
+    display: inline-block;
+    top: 1px;
+    right: 3px;
+    background: url("/uploads/media/default/0001/02/f7b4d3d2ba3fe1d8518e6e63d7740e1e73921abf.png") right / 90% no-repeat #eee;
+    pointer-events: none;
+}
+
+.cat-info {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(212, 212, 212);
+    border-radius: 8px;
+}
+
+.image {
+    display: flex;
+    object-fit: cover;
+    width: 35%;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.cat-info-text {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.temperament {
+    font-weight: 600;
+}
+
+.is-hidden {
+    display: none;
+}
