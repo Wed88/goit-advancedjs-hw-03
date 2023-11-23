@@ -32,8 +32,12 @@ function createListCats(data) {
   return data.map(({ id, name }) => `<option value="${id}">${name}</option>`).join("");
 };
 
-function createCatMarkup({ url, breeds } = data) {
-  loaderEl.setAttribute("hidden", "hidden");
+function createCatMarkup(data) {
+  if (data === undefined) {
+    loaderEl.setAttribute("hidden", "hidden")
+  };
+  
+  const { url, breeds } = data;
     
   const catCard = `
     <img class="image" src="${url}" alt="${breeds[0].name}" />
@@ -44,5 +48,6 @@ function createCatMarkup({ url, breeds } = data) {
     </div>
   `;
 
+  loaderEl.setAttribute("hidden", "hidden");
   catInfoEl.innerHTML = catCard;  
 };
